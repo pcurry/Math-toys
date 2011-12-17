@@ -2,16 +2,22 @@
 
 collatz_orbits = {1: [1], 2: [2, 1]}
 
+
 def collatz_orbit_list(num):
+    """ Given a number, return a list of the orbit
+    """
     return collatz_orbit_tail_recursive_memo(num, [], collatz_orbits)
 
+
 def collatz_orbit_tail_recursive_memo(num, orbit, memo={1: [1], 2: [2, 1], 4: [4, 2, 1]}):
+    """ 
+    """
     if num in memo:
         result = memo[num]
         if orbit != []:
             # Patch the results into the memo
-            for n in orbit:
-                memo[n] = orbit[orbit.index(n):] + result
+            for x in xrange(len(orbit)):
+                memo[orbit[x]] = orbit[x:] + result
             result = orbit + result
         return result
     else:
