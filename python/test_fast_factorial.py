@@ -47,5 +47,6 @@ class TestMoessner(TestNaive):
         self.fact_fun = fast_factorial.moessner
 
 
+
 if __name__ == '__main__':
     unittest.main()
