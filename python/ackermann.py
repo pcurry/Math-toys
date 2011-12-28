@@ -18,18 +18,18 @@ def ackermann_peter(m, n):
         return ackermann_peter(m - 1, ackermann_peter(m, n - 1))
 
 
+partial_funcs = {0: lambda n: n + 1, 
+                 1: lambda n: n + 2, 
+                 2: lambda n: 2 * n + 3}
+
 def ackermann_peter_faster(m, n):
     """
 
     """
     if m < 0 or n < 0:
         raise InvalidInputException("m and n both need to be greater than 0")
-    elif m == 0:
-        return n + 1
-    elif m == 1:
-        return n + 2
-    elif m == 2:
-        return 2 * n + 3
+    elif m >= 0 and m <= 2:
+        return partial_funcs[m](n)
     elif m == 3:
         try:
             result = (1 << (n + 3)) - 3
@@ -45,16 +45,15 @@ def ackermann_peter_faster(m, n):
 
 def ackermann_peter_faster_memo(m, n, memo={(4, 1): 65533, (3, 1): 13}):
     """
-
+    This method implements the same accelerated computation of the ackerman function as 
+    is in ackermann_peter_faster, with the addition of a memo dictionary for caching results 
+    and sub-computations along the way.
     """
     if m < 0 or n < 0:
         raise InvalidInputException("m and n both need to be greater than or equal to 0")
-    elif m == 0:
-        return n + 1
-    elif m == 1:
-        return n + 2
-    elif m == 2:
-        return 2 * n + 3
+    # FIXME: Check if they are integers
+    elif m >= 0 and m <= 2:
+        return partial_funcs[m](n)
     elif (m, n) in memo:
         return memo[(m, n)]
     elif m == 3:

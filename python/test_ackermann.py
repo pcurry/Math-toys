@@ -67,10 +67,10 @@ class TestAckermannPeterFasterMemo(TestAckermannPeterFaster):
         expected = (1 << 65536) - 3
         self.basic_execution(4, 2, expected)
 
-    def test_m_4_n_3(self):
-        intermediate = self.ap(4, 2)
-        expected = (2 ** intermediate) - 3
-        self.basic_execution(4, 3, expected)
+    # def test_m_4_n_3(self):
+    #     intermediate = self.ap(4, 2)
+    #     expected = (2 ** intermediate) - 3
+    #     self.basic_execution(4, 3, expected)
 
 if __name__ == "__main__":
     unittest.main()
