@@ -31,7 +31,11 @@ def ackermann_peter_faster(m, n):
     elif m == 2:
         return 2 * n + 3
     elif m == 3:
-        return (2 ** (n + 3)) - 3
+        try:
+            result = (1 << (n + 3)) - 3
+        except OverflowError:
+            result = (2 ** (n + 3)) - 3
+        return result
     elif n == 0:
         return ackermann_peter_faster(m - 1, 1)
     else:
@@ -39,7 +43,7 @@ def ackermann_peter_faster(m, n):
 
 
 
-def ackermann_peter_faster_memo(m, n, memo={(1, 1): 1, (2, 0): 1}):
+def ackermann_peter_faster_memo(m, n, memo={(4, 1): 65533, (3, 1): 13}):
     """
 
     """
@@ -54,7 +58,10 @@ def ackermann_peter_faster_memo(m, n, memo={(1, 1): 1, (2, 0): 1}):
     elif (m, n) in memo:
         return memo[(m, n)]
     elif m == 3:
-        result = (2 ** (n + 3)) - 3
+        try:
+            result = (1 << (n + 3)) - 3
+        except OverflowError:
+            result = (2 ** (n + 3)) - 3
         memo[(m, n)] = result
         return result
     elif n == 0:
